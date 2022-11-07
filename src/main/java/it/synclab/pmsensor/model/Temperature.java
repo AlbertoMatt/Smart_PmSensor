@@ -1,18 +1,16 @@
 package it.synclab.pmsensor.model;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,8 +22,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Table(name = "temperature", uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "fk_sensor_id" }) })
+@Table(name = "temperature")
 
 public class Temperature {
     @Id
@@ -35,15 +32,17 @@ public class Temperature {
     private String latitude;
     private String longitude;
     private Date timestamp;
-    
+
     @Column(name = "value")
     private String value;
 
-    @Column(name = "fk_sensor_id")
-    private Long fkSensorId;
+    // @Column(name = "fk_sensor_id")
+    // private Long fkSensorId;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "temperature", referencedColumnName = "value")
-    private List<AmbientInfos> ambient_infos;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "fk_ai", referencedColumnName = "id")
+    @JsonIgnore
+    @OneToOne(mappedBy = "temp")
+    private AmbientInfos ambientInfo;
 
 }

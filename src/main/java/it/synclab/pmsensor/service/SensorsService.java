@@ -1,8 +1,8 @@
-package it.synclab.pmsensor.service;
+// package it.synclab.pmsensor.service;
 
-import org.springframework.stereotype.Service;
+// import org.springframework.stereotype.Service;
 
-@Service
-public class SensorsService {
+// @Service
+// public class SensorsService {
 
-}
+// }
