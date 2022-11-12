@@ -1,47 +1,60 @@
-// package it.synclab.pmsensor.service;
+package it.synclab.pmsensor.service;
 
-// import org.apache.logging.log4j.LogManager;
-// import org.apache.logging.log4j.Logger;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.beans.factory.annotation.Value;
-// import org.springframework.stereotype.Service;
+import java.util.List;
 
-// import it.synclab.pmsensor.model.AmbientInfos;
-// import it.synclab.pmsensor.model.ParticularMatter25;
-// import it.synclab.pmsensor.repository.PM25Repository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
-// @Service
-// public class PM25Service {
+import it.synclab.pmsensor.model.ParticularMatter25;
+import it.synclab.pmsensor.repository.AmbientInfosRepository;
+import it.synclab.pmsensor.repository.PM25Repository;
 
-//     @Value("${sensor.ambienting.url}")
-//     private String sensorDataUrl;
+@Service
+public class PM25Service {
 
-//     @Autowired
-//     private PM25Repository pm25Rep;
+    @Value("${sensor.ambienting.url}")
+    private String sensorDataUrl;
 
-//     private static final Logger logger = LogManager.getLogger(PM25Service.class);
+    @Autowired
+    private PM25Repository pm25Rep;
 
-//     public ParticularMatter25 buildPm25FromAmbientInfos(AmbientInfos ai) {
-//         ParticularMatter25 pMatter25 = new ParticularMatter25();
-//         pMatter25.setAddress("Padova Galleria Spagna");
-//         pMatter25.setLatitude(String.valueOf(45.388653));
-//         pMatter25.setLongitude(String.valueOf(11.928344));
-//         pMatter25.setTimestamp(ai.getDate());
-//         pMatter25.setValue(String.valueOf(ai.getPm10()));
-//         pMatter25.setAmbient_info(ai);
-//         return pMatter25;
-//     }
+    @Autowired
+    private AmbientInfosRepository ambientInfosRepository;
 
-//     public void savePM25Data(ParticularMatter25 pm25) {
-//         logger.debug("PM25Service START savePM25Data");
-//         try {
-//             pm25Rep.save(pm25);
-//         } catch (Exception e) {
-//             logger.error("PM25Service - Error", e);
-//         }
-//         logger.debug("PM25Service END savePM25Data");
-//     }
+    private static final Logger logger = LogManager.getLogger(PM25Service.class);
 
+    public List<ParticularMatter25> getAllParticularMatter25() {
+        List<ParticularMatter25> pm25 = pm25Rep.getAllParticularMatter25();
+        return pm25;
+    }
 
+    public ParticularMatter25 getParticularMatter25ByAmbInfId(Long ambientInfo) {
+        ParticularMatter25 pm25 = pm25Rep.getParticularMatter25ByAmbInfId(ambientInfo);
+        return pm25;
+    }
 
-// }
+    public String getValueById(Long id) {
+        return pm25Rep.getValueById(id);
+    }
+
+    public void updatePM25ValueById(String value, Long id) {
+        pm25Rep.updatePM25ValueById(value, id);
+    }
+
+    public void updatePM25ValueByAIId(String value, Long ambientInfo) {
+        pm25Rep.updatePM25ValueByAIId(value, ambientInfo);
+    }
+
+    public void deletePM25ByAIId(Long ambientInfo) {
+        pm25Rep.deletePM25ByAIId(ambientInfo);
+    }
+
+    public void deletePM25ById(Long id) {
+        ambientInfosRepository.updateAmbientInfosPMatter25(id, null);
+        pm25Rep.deletePM25ById(id);
+    }
+
+}

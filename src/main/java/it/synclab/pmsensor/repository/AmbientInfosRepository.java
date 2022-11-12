@@ -4,14 +4,20 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.synclab.pmsensor.model.AmbientInfos;
+import it.synclab.pmsensor.model.Humidity;
+import it.synclab.pmsensor.model.ParticularMatter10;
+import it.synclab.pmsensor.model.ParticularMatter25;
+import it.synclab.pmsensor.model.Temperature;
 
 @Repository
-public interface AmbientInfosRepository extends JpaRepository<AmbientInfos,Long> {
-    
+public interface AmbientInfosRepository extends JpaRepository<AmbientInfos, Long> {
+
     @Query("select a from AmbientInfos a order by id")
     public List<AmbientInfos> getAllAmbientInfos();
 
@@ -36,5 +42,11 @@ public interface AmbientInfosRepository extends JpaRepository<AmbientInfos,Long>
     public Date getMaxDate();
 
     public void deleteById(Long id);
+
+    @Transactional
+    @Modifying
+    @Query("update AmbientInfos t set t.pMatter25 = ?2 where t.pMatter25.id = ?1")
+    public void updateAmbientInfosPMatter25(Long oldValue, ParticularMatter25 newValue);
+
 
 }

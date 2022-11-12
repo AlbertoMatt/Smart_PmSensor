@@ -26,8 +26,9 @@ import it.synclab.pmsensor.service.StartUpServices;
 @RequestMapping("/ambient-infos")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class AmbientInfosController {
-
+    
     private static final Logger logger = LogManager.getLogger(AmbientInfosController.class);
+    
 
     @Autowired
     AmbientInfosService ambientIService;

@@ -22,7 +22,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Table(name = "ambient_infos")
-
 public class AmbientInfos {
 
     @Id
@@ -34,17 +33,17 @@ public class AmbientInfos {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_particular_matter_2_5", referencedColumnName = "id")
     private ParticularMatter25 pMatter25;
-    
+
     // @OneToOne(mappedBy = "ambientInfo")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_particular_matter_10", referencedColumnName = "id")
     private ParticularMatter10 pMatter10;
-    
+
     // @OneToOne(mappedBy = "ambientInfo")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_temperature", referencedColumnName = "id")
     private Temperature temp;
-    
+
     // @OneToOne(mappedBy = "ambientInfo")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_humidity", referencedColumnName = "id")
