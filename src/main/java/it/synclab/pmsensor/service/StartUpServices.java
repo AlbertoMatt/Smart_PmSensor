@@ -63,23 +63,25 @@ public class StartUpServices {
             for (String row : rows) {
                 AmbientInfos ai1 = new AmbientInfos();
                 String[] parts = row.split(";");
-                String completeDate = parts[0] + " " + parts[1] + ":00:00";
-                Date date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(completeDate);
-                // 30-10-2022 17:00:00
-                ai1.setDate(date);
-                ParticularMatter25 pm25= createPm25(parts, date);
-                ParticularMatter10 pm10= createPm10(parts, date);
-                Temperature temperature= createTemperature(parts, date);
-                Humidity humidity = createHumidity(parts, date);
+                if(parts.length == 6){
+                    String completeDate = parts[0] + " " + parts[1] + ":00:00";
+                    Date date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(completeDate);
+                    // 30-10-2022 17:00:00
+                    ai1.setDate(date);
+                    ParticularMatter25 pm25 = createPm25(parts, date);
+                    ParticularMatter10 pm10 = createPm10(parts, date);
+                    Temperature temperature = createTemperature(parts, date);
+                    Humidity humidity = createHumidity(parts, date);
 
+                    // humidity = humidityRepository.save(humidity);
+                    ai1.setPMatter25(pm25);
+                    ai1.setPMatter10(pm10);
+                    ai1.setTemp(temperature);
+                    ai1.setHumidity(humidity);
 
-                // humidity = humidityRepository.save(humidity);
-                ai1.setPMatter25(pm25);
-                ai1.setPMatter10(pm10);
-                ai1.setTemp(temperature);
-                ai1.setHumidity(humidity);
-
-                list.add(ai1);
+                    list.add(ai1);
+                }
+                
             }
             ambientInfosList.setAil(list);
         } catch (Exception e) {
