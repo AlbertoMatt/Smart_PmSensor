@@ -41,6 +41,9 @@ public interface AmbientInfosRepository extends JpaRepository<AmbientInfos, Long
     @Query("select MAX(a.date) from AmbientInfos a")
     public Date getMaxDate();
 
+    @Query("select MIN(a.date) from AmbientInfos a")
+    public Date getMinDate();
+
     public void deleteById(Long id);
 
     @Transactional

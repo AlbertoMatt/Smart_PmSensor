@@ -47,6 +47,10 @@ public class AmbientInfosService {
         return ambInfosRep.getMaxDate();
     }
 
+    public Date getMinDate() {
+        return ambInfosRep.getMinDate();
+    }
+
     public void deleteAmbientInfosById(Long id) {
         ambInfosRep.deleteById(id);
     }

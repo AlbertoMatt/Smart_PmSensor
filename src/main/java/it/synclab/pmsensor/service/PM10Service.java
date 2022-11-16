@@ -2,27 +2,17 @@ package it.synclab.pmsensor.service;
 
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import it.synclab.pmsensor.model.AmbientInfos;
 import it.synclab.pmsensor.model.ParticularMatter10;
-import it.synclab.pmsensor.repository.AmbientInfosRepository;
 import it.synclab.pmsensor.repository.PM10Repository;
 
 @Service
 public class PM10Service {
-    @Value("${sensor.ambienting.url}")
-    private String sensorDataUrl;
 
     @Autowired
     private PM10Repository pm10Rep;
-
-
-    private static final Logger logger = LogManager.getLogger(PM10Service.class);
 
     public List<ParticularMatter10> getAllParticularMatter10() {
         List<ParticularMatter10> pm10 = pm10Rep.getAllParticularMatter10();
