@@ -1,7 +1,9 @@
 package it.synclab.pmsensor.service;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -103,8 +105,11 @@ public class StartUpServices {
         pm25.setAddress("Padova Galleria Spagna");
         pm25.setLatitude("45.388653");
         pm25.setLongitude("11.928344");
-        pm25.setTimestamp(date);
-        pm25.setValue(parts[2]);
+        Timestamp ts = new Timestamp(System.currentTimeMillis());
+        Date timestamp = new Date(ts.getTime());
+        pm25.setTimestamp(timestamp);
+        pm25.setDate(date);
+        pm25.setValue(Double.parseDouble(parts[2]));
         return pm25;
     }
 
@@ -113,8 +118,11 @@ public class StartUpServices {
         pm10.setAddress("Padova Galleria Spagna");
         pm10.setLatitude("45.388653");
         pm10.setLongitude("11.928344");
-        pm10.setTimestamp(date);
-        pm10.setValue(parts[3]);
+        Timestamp ts = new Timestamp(System.currentTimeMillis());
+        Date timestamp = new Date(ts.getTime());
+        pm10.setTimestamp(timestamp);
+        pm10.setDate(date);
+        pm10.setValue(Double.parseDouble(parts[3]));
         return pm10;
     }
 
@@ -123,8 +131,11 @@ public class StartUpServices {
         temperature.setAddress("Padova Galleria Spagna");
         temperature.setLatitude("45.388653");
         temperature.setLongitude("11.928344");
-        temperature.setTimestamp(date);
-        temperature.setValue(parts[4]);
+        Timestamp ts = new Timestamp(System.currentTimeMillis());
+        Date timestamp = new Date(ts.getTime());
+        temperature.setTimestamp(timestamp);
+        temperature.setDate(date);
+        temperature.setValue(Double.parseDouble(parts[4]));
         return temperature;
     }
 
@@ -133,8 +144,11 @@ public class StartUpServices {
         humidity.setAddress("Padova Galleria Spagna");
         humidity.setLatitude("45.388653");
         humidity.setLongitude("11.928344");
-        humidity.setTimestamp(date);
-        humidity.setValue(parts[5]);
+        Timestamp ts = new Timestamp(System.currentTimeMillis());
+        Date timestamp = new Date(ts.getTime());
+        humidity.setTimestamp(timestamp);
+        humidity.setDate(date);
+        humidity.setValue(Double.parseDouble(parts[5]));
         return humidity;
     }
 

@@ -32,9 +32,10 @@ public class Humidity {
     private String latitude;
     private String longitude;
     private Date timestamp;
+    private Date date;
 
     @Column(name = "value")
-    private String value;
+    private Double value;
 
     // @Column(name = "fk_sensor_id")
     // private Long fkSensorId;
